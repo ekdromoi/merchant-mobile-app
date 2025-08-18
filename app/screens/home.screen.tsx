@@ -1,7 +1,9 @@
-import { Text, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import { createThirdwebClient, defineChain } from "thirdweb";
 import { baseSepolia } from "thirdweb/chains";
 import { ConnectButton, useActiveAccount } from "thirdweb/react";
+import { NewOrders } from "../components/new-orders";
+import { COLORS } from "../design";
 
 export const chain = defineChain({
   id: baseSepolia.id,
@@ -31,7 +33,7 @@ const HomeScreen = () => {
   console.log(activeAccount?.address);
 
   return (
-    <View>
+    <View style={styles.container}>
       <Text>Home</Text>
       <ConnectButton
         client={walletConfig.client}
@@ -39,9 +41,17 @@ const HomeScreen = () => {
         accountAbstraction={walletConfig.accountAbstraction}
       />
       <Text>{activeAccount?.address}</Text>
+      <NewOrders />
     </View>
   );
 };
 
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: COLORS.white,
+    position: "relative",
+  },
+});
 
 export default HomeScreen;
